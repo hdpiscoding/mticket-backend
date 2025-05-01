@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Table(name = "booking")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -52,13 +52,13 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public UUID extractUserId(String token) {
+    public Long extractUserId(String token) {
         Claims claims = extractAllClaims(token);
         if (claims != null) {
             Date expiration = claims.getExpiration();
             boolean isExpired = expiration.before(Date.from(Instant.now()));
             if (!isExpired) {
-                return UUID.fromString(claims.get("userId", String.class));
+                return claims.get("userId", Long.class);
             }
             else {
                 return null;

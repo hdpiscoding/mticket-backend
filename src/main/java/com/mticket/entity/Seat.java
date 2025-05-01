@@ -11,6 +11,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "seat")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,10 +21,10 @@ public class Seat {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "showtime_id", nullable = false)
+    @JoinColumn(name = "showtime_id")
     private Showtime showtime;
 
-    @Column(name = "row")
+    @Column(name = "`row`")
     private String row;
 
     @Column(name = "number")

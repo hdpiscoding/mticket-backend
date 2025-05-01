@@ -7,7 +7,7 @@ import java.util.UUID;
 public interface JwtService {
     String generateToken(User user);
     String extractUsername(String token);
-    UUID extractUserId(String token);
+    Long extractUserId(String token);
     String extractRole(String token);
     boolean isTokenExpired(String token);
 }
