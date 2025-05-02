@@ -26,11 +26,11 @@ public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager authenticationManager;
 
     @Override
-    public AuthResponseDTO register(AuthRequestDTO request) {
+    public AuthResponseDTO register(AuthRequestDTO request, Role role) {
         User user = new User();
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole(Role.USER);
+        user.setRole(role);
         User newUser = userRepository.save(user);
         String token = jwtService.generateToken(newUser);
         return AuthResponseDTO

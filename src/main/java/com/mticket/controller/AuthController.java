@@ -3,6 +3,7 @@ package com.mticket.controller;
 import com.mticket.base.BaseController;
 import com.mticket.dto.AuthRequestDTO;
 import com.mticket.dto.AuthResponseDTO;
+import com.mticket.enums.Role;
 import com.mticket.service.interfaces.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,10 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController extends BaseController {
     private final AuthService authService;
 
-    @PostMapping("/register")
-    public ResponseEntity<Object> register(@RequestBody AuthRequestDTO request) {
-        AuthResponseDTO response = authService.register(request);
+    @PostMapping("/user/register")
+    public ResponseEntity<Object> registerUser(@RequestBody AuthRequestDTO request) {
+        AuthResponseDTO response = authService.register(request, Role.USER);
         return buildResponse(response, HttpStatus.CREATED, "User registered successfully");
+    }
+
+    @PostMapping("/admin/register")
+    public ResponseEntity<Object> registerAdmin(@RequestBody AuthRequestDTO request) {
+        AuthResponseDTO response = authService.register(request, Role.ADMIN);
+        return buildResponse(response, HttpStatus.CREATED, "Admin registered successfully");
     }
 
     @PostMapping("/login")
