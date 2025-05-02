@@ -9,12 +9,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface SeatRepository extends JpaRepository<Seat, Long> {
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @Query("SELECT s FROM Seat s WHERE s.id IN :seatIds AND s.status = 'AVAILABLE' AND s.showtime.id = :showtimeId")
-    List<Seat> findByIdsForUpdate(@Param("seatIds") List<Long> seatIds, @Param("showtimeId") Long showtimeId);
+    @Query("SELECT s FROM Seat s WHERE s.id = :seatId AND s.status = 'AVAILABLE' AND s.showtime.id = :showtimeId")
+    Optional<Seat> findByIdForUpdate(@Param("seatId") Long seatId, @Param("showtimeId") Long showtimeId);
 
     List<Seat> findByShowtimeId(Long showTimeId);
 }

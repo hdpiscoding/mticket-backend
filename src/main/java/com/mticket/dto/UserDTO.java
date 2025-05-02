@@ -1,5 +1,6 @@
 package com.mticket.dto;
 
+import com.mticket.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,4 +14,5 @@ public class UserDTO {
     private Long id;
     private String username;
     private String avatar;
+    private Role role;
 }

@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.*;
 public class ShowtimeController extends BaseController {
     private final ShowtimeService showtimeService;
 
-    @GetMapping("/{movieId}")
-    public ResponseEntity<Object> getAllShowtimesByMovie(@PathVariable Long movieId) {
+    @GetMapping("")
+    public ResponseEntity<Object> getAllShowtimesByMovie(@RequestParam Long movieId) {
         return buildResponse(showtimeService.getAllShowtimesByMovie(movieId), HttpStatus.OK, "Showtimes retrieved successfully");
     }
 
@@ -28,8 +28,8 @@ public class ShowtimeController extends BaseController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateShowtime(@PathVariable Long id, @RequestParam Long movieId, @RequestBody Showtime showtime) {
-        return buildResponse(showtimeService.updateShowtime(id, movieId, showtime), HttpStatus.OK, "Showtime updated successfully");
+    public ResponseEntity<Object> updateShowtime(@PathVariable Long id, @RequestBody Showtime showtime) {
+        return buildResponse(showtimeService.updateShowtime(id, showtime), HttpStatus.OK, "Showtime updated successfully");
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")

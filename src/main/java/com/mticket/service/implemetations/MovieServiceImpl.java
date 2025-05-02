@@ -35,6 +35,7 @@ public class MovieServiceImpl implements MovieService {
         m.setGenre(movie.getGenre());
         m.setDescription(movie.getDescription());
         m.setReleaseDate(movie.getReleaseDate());
+        m.setPosterUrl(movie.getPosterUrl());
         m.setDuration(movie.getDuration());
         return movieRepository.save(m);
     }

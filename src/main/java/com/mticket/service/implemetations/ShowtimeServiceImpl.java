@@ -31,7 +31,7 @@ public class ShowtimeServiceImpl implements ShowtimeService {
         for (int i = 1; i <= showtime.getTotalSeats(); i++) {
             Seat seat = new Seat();
             seat.setRow(String.valueOf((char) ('A' + (i - 1) / 10)));
-            seat.setNumber(i);
+            seat.setNumber(i % 10);
             seat.setStatus(SeatStatus.AVAILABLE);
             seat.setShowtime(savedShowTime);
             seatRepository.save(seat);
@@ -41,17 +41,13 @@ public class ShowtimeServiceImpl implements ShowtimeService {
 
     @Override
     @Transactional
-    public Showtime updateShowtime(Long id, Long movieId, Showtime showtime) {
+    public Showtime updateShowtime(Long id, Showtime showtime) {
         Showtime s = showTimeRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("ShowTime not found"));
-        Movie m = movieRepository.findById(movieId)
-                .orElseThrow(() -> new IllegalStateException("Movie not found"));
-        s.setMovie(m);
         s.setRoom(showtime.getRoom());
         s.setPrice(showtime.getPrice());
         s.setDate(showtime.getDate());
         s.setTime(showtime.getTime());
-        s.setTotalSeats(s.getTotalSeats());
         return showTimeRepository.save(s);
     }
 
