@@ -20,6 +20,11 @@ public class MovieController extends BaseController {
         return buildResponse(movieService.getAllMovies(), HttpStatus.OK, "Movies fetched successfully");
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getMovieDetail(@PathVariable Long id) {
+        return buildResponse(movieService.getMovieById(id), HttpStatus.OK, "Movie fetched successfully");
+    }
+
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("")
     public ResponseEntity<Object> createMovie(@RequestBody Movie movie) {

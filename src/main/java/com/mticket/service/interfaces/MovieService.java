@@ -9,4 +9,5 @@ public interface MovieService {
     Movie createMovie(Movie movie);
     Movie updateMovie(Long id, Movie movie);
     void deleteMovie(Long id);
+    Movie getMovieById(Long id);
 }

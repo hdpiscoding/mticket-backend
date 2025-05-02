@@ -45,4 +45,9 @@ public class MovieServiceImpl implements MovieService {
     public void deleteMovie(Long id) {
         movieRepository.deleteById(id);
     }
+
+    @Override
+    public Movie getMovieById(Long id) {
+        return movieRepository.findById(id).orElseThrow(() -> new IllegalStateException("Movie not found"));
+    }
 }
