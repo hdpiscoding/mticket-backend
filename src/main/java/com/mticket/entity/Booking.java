@@ -33,7 +33,7 @@ public class Booking {
     @JoinColumn(name = "showtime_id")
     private Showtime showtime;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Seat> seats;
 
     @Column(name = "total_price")
