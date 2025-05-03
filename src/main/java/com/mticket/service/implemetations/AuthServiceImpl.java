@@ -28,6 +28,9 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public AuthResponseDTO register(AuthRequestDTO request, Role role) {
         User user = new User();
+        if (userRepository.existsByUsername(request.getUsername())) {
+            throw new RuntimeException("Username already exists");
+        }
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(role);
